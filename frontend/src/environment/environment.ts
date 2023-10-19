@@ -1,5 +1,5 @@
-export const environment = {
+export const environment= {
   api: {
-    APP_API: "./"
+    APP_API: "http://localhost:8080/"
   }
 }
