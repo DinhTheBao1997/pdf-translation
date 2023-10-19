@@ -33,14 +33,14 @@ export class ApiService implements IApiService {
     return from(request);
   }
 
-  private catchError(request: Observable<IResponse>): Observable<IResponse> {
-    return request.pipe(catchError(error => of({ errorCode: error?.error?.errorCode || '500' })));
-  }
-
-  private joinApiUrl(pathname: string, query: string) {
+  public joinApiUrl(pathname: string, query: string) {
     let url = environment.api.APP_API + pathname;
     if (typeof query == 'string') url += query;
     return url;
+  }
+
+  private catchError(request: Observable<IResponse>): Observable<IResponse> {
+    return request.pipe(catchError(error => of({ errorCode: error?.error?.errorCode || '500' })));
   }
 
   private createUrlQuery(query: CustomType<string>): string {

@@ -15,4 +15,6 @@ Including another URLconf
 """
 from django.urls import include, path
 
-urlpatterns = []
+urlpatterns = [
+    path("pdf-translation/", include("pdf_translation.urls")),
+]
