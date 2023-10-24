@@ -2,6 +2,11 @@ from fpdf import FPDF
 from fpdf.py3k import PY3K
 
 class CustomFPDF(FPDF):
+    def config(self):
+        self.compress = False
+        self.add_font('times', '', './static/fonts/times/times.ttf', uni=True) 
+        pass
+
     def output(self, name='',dest=''):
         "Output PDF to some destination"
         #Finish document if necessary

@@ -4,17 +4,22 @@ import { CommonModule } from '@angular/common';
 import { SidebarComponent } from './ui/sidebar/sidebar.component';
 import { Utilities } from './utility/utilities';
 import { ApiService } from './service/api.service';
+import { LoadingComponent } from './ui/loading/loading.component';
+import { NgxLoadingModule } from "ngx-loading";
+import { LoadingService } from './service/loading.service';
 
 
 
 @NgModule({
-  providers: [Utilities, ApiService],
+  providers: [Utilities, ApiService, LoadingService],
   declarations: [
-    SidebarComponent
+    SidebarComponent,
+    LoadingComponent
   ],
   imports: [
     HttpClientModule,
-    CommonModule
+    CommonModule,
+    NgxLoadingModule,
   ],
   exports: [
     SidebarComponent

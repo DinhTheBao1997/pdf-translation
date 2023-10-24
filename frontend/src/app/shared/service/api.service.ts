@@ -16,15 +16,13 @@ export class ApiService implements IApiService {
   constructor(private httpClient: HttpClient) { }
 
   public get(pathname: string, query: CustomType<string> = null): Promise<IResponse> {
-    const strQuery = this.createUrlQuery(query);
-    const url = this.joinApiUrl(pathname, strQuery);
+    const url = this.joinApiUrl(pathname, query);
     const request = this.httpClient.get(url);
     return firstValueFrom(this.catchError(request));
   }
 
   public post(pathname: string, body: Object, query: CustomType<string> = null): Promise<IResponse> {
-    const strQuery = this.createUrlQuery(query);
-    const url = this.joinApiUrl(pathname, strQuery);
+    const url = this.joinApiUrl(pathname, query);
     const request = this.httpClient.post(url, body);
     return firstValueFrom(this.catchError(request));
   }
@@ -33,9 +31,10 @@ export class ApiService implements IApiService {
     return from(request);
   }
 
-  public joinApiUrl(pathname: string, query: string) {
+  public joinApiUrl(pathname: string, query: CustomType<string> = null) {
     let url = environment.api.APP_API + pathname;
-    if (typeof query == 'string') url += query;
+    const strQuery = this.createUrlQuery(query);
+    if (typeof strQuery == 'string') url += strQuery;
     return url;
   }
 

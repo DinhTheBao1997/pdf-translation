@@ -1,4 +1,5 @@
 import { Injector, ProviderToken } from "@angular/core";
+import { LoadingService } from "../service/loading.service";
 
 export class Decorator {
   static injector: Injector;
@@ -11,12 +12,11 @@ export function ExceptionHandler() {
   return function (target: any, propertyKey: string, descriptor: any) {
     const originalMethod: Function = descriptor.value;
     descriptor.value = async function (...args) {
-      // const common = getInjector(Utilities);
       try {
         const result = await originalMethod.apply(this, args);
         return result;
       } catch (error) {
-        // common.showExceptionError(error);
+        console.error(error)
       }
     };
   };
@@ -29,15 +29,14 @@ export function ApiProcess() {
   return function (target: any, propertyKey: string, descriptor: any) {
     const originalMethod: Function = descriptor.value;
     descriptor.value = async function (...args) {
-      // const common = getInjector(Utilities);
-      // const loading = getInjector(LoadingService).show();
+      const loading = getInjector(LoadingService).show();
       try {
         const result = await originalMethod.apply(this, args);
         return result;
       } catch (error) {
-        // common.showExceptionError(error);
+        console.error(error)
       } finally {
-        // loading.destroy();
+        loading.destroy();
       }
     };
   };

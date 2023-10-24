@@ -1,4 +1,5 @@
 from django.core.files.base import File
+from pyquery import PyQuery
 from pdfquery import PDFQuery
 from ..common.common import write_file
 import tempfile
@@ -9,7 +10,35 @@ from pypdf import PdfReader, PdfWriter, generic, _utils
 from fpdf import FPDF
 import sys
 from ..CustomPyPDF.CustomFPDF import CustomFPDF
-    
+import sys
+import json
+
+SIZE = {
+    "A4": {
+        "x": 210,
+        "y": 297,
+    }
+}
+
+def children(pdfQuery: PyQuery, pdf: CustomFPDF):
+    if pdfQuery is None:
+        return
+    lst = pdfQuery.getchildren()
+    if lst is None or len(lst) == 0:
+        if "text" not in pdfQuery.tag.lower():
+            return
+        text = pdfQuery.text
+        if text is None or len(text) == 0:
+            return
+        x0 = float(pdfQuery.attrib["x0"])
+        y0 = float(pdfQuery.attrib["y0"])
+        y1 = float(pdfQuery.attrib["y1"])
+        pdf.set_font_size(abs(y0 - y1))
+        x = x0
+        y = 792 - y0
+        pdf.text(x, y, text)
+    for child in pdfQuery.getchildren():
+        children(child, pdf)
 
 class PdfFile:
     __file: File
@@ -20,72 +49,52 @@ class PdfFile:
         self.__fileName = fileName
 
     def scan_pdf(self):
-        # PdfFile.__scan_pdf_PDFQuery(self)
-        # PdfFile.__scan_pdf_pypdf(self)
-        PdfFile.__scan_pdf_fpdf(self)
+        # PdfFile.__scan_pdf_fpdf(self)
+        PdfFile.__scan_pdf_PDFQuery(self)
         pass
-
-    def __scan_pdf_pypdf(self):
-        lst = []
-        pdf_write = PdfWriter()
-        pdfReader = CustomPdfReader(self.__file)
-        pagecount = len(pdfReader.pages)
-        for p in range(pagecount):
-            pageObj = pdfReader.pages[p]
-            text = pageObj.extract_text()
-            pdf_write.add_page(pageObj)
-            # lst.append(pageObj.extract_text())
-        # write_file("./%s.txt" % self.__fileName, "\n".join(lst))
-        with open('test.pdf', 'wb') as fh:
-            pdf_write.write(fh)
 
     def __scan_pdf_fpdf(self):
         pdf = CustomFPDF()
+        pdf.config()
+
         # compression is not yet supported in py3k version
-        pdf.compress = False
         pdfReader = CustomPdfReader(self.__file)
         pagecount = len(pdfReader.pages)
-        # for p in range(pagecount):
-        #     pageObj = pdfReader.pages[p]
-        #     text = pageObj.extract_text()
-        #     pdf.add_page()
-        #     pdf.set_font('Arial', '', 11)  
-        #     pdf.ln(10)
-        #     pdf.write(5, "text")
-        # with open('py3k.pdf', 'wb') as f:
-        #     f.write(pdf.buffer)
 
-        pdf.add_font('times', '', 'times.ttf', uni=True) 
-        for p in range(pagecount):
+        for p in range(10):
             pageObj = pdfReader.pages[p]
             text = pageObj.extract_text()
-            pdf.add_page()
-            pdf.set_font('times', '', 11)  
-            pdf.ln(10)
-            pdf.write(5, text)
-            print(pdf.text(5, 10))
+            PdfFile.__addTextToPdf(pdf, text)
         pdf.output('py3k.pdf', 'F')
         pass
 
-    def write_new_file():
-        pass
-
     def __scan_pdf_PDFQuery(self):
-        pdf = PDFQuery(self.__file)
+        pdfQuery = PDFQuery(self.__file)
         # pdf.load()
-        lst = []
+        # lst = []
+        pdf = CustomFPDF('P', 'pt', 'letter')
+        pdf.config()
 
-        pagecount = pdf.doc.catalog['Pages'].resolve()['Count']
+        pagecount = pdfQuery.doc.catalog['Pages'].resolve()['Count']
         # master = pd.DataFrame()
         for p in range(pagecount):
-            pdf.load(p)
-            page = PdfFile.__pdfscrape(pdf, lst) 
-        print(tempfile.gettempdir())
-        write_file("./%s.txt" % self.__fileName, "\n".join(lst))
+            pdfQuery.load(p)
+            PdfFile.__addPage(pdf)
+            text = PdfFile.__pdfscrape(pdfQuery, pdf) 
+        pdf.output('__scan_pdf_PDFQuery.pdf', 'F')
 
-    def __pdfscrape(pdf: PDFQuery, lst: list[str]):
-        # Extract each relevant information individually
-        pq = pdf.pq('LTTextLineHorizontal')
-        text = pq.text(squash_space=False)
-        text = text.replace("  ", "\n")
-        lst.append(text)
+    def __pdfscrape(pdfQuery: PDFQuery, pdf: CustomFPDF):
+        pq = pdfQuery.pq('LTPage')
+        for child in pq.children():
+            children(child, pdf)
+    def __addPage(pdf: CustomFPDF):
+        pdf.add_page()
+        pdf.set_font('times', '', 11)  
+        pdf.ln(10)
+    
+    def __addTextToPdf(pdf: CustomFPDF, text: str, x, y):
+        pdf.add_page()
+        pdf.set_font('times', '', 11)  
+        pdf.ln(10)
+        pdf.text(x, y, txt=text)
+        print(pdf.get_x())
