@@ -12,3 +12,5 @@ backend/.vscode
 backend/**/__pycache__
 backend/**/__init__.py
 backend/**/*.log
+*.pkl
+*.pdf
