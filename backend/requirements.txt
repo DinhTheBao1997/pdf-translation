@@ -2,3 +2,8 @@
 
 PDFQuery
 pypdf
+transformers
+sentencepiece
+tokenizers
+torch
+protobuf

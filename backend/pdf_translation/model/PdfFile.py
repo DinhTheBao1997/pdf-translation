@@ -12,6 +12,7 @@ import sys
 from ..CustomPyPDF.CustomFPDF import CustomFPDF
 import sys
 import json
+from ..nlp.service.vinai_transalte import VinaiTranslate
 
 SIZE = {
     "A4": {
@@ -36,6 +37,7 @@ def children(pdfQuery: PyQuery, pdf: CustomFPDF):
         pdf.set_font_size(abs(y0 - y1))
         x = x0
         y = 792 - y0
+        text = VinaiTranslate.translate_en2vi(text)
         pdf.text(x, y, text)
     for child in pdfQuery.getchildren():
         children(child, pdf)
@@ -77,9 +79,10 @@ class PdfFile:
 
         pagecount = pdfQuery.doc.catalog['Pages'].resolve()['Count']
         # master = pd.DataFrame()
-        for p in range(pagecount):
+        for p in range(10):
             pdfQuery.load(p)
             PdfFile.__addPage(pdf)
+            print("Page %s" % p)
             text = PdfFile.__pdfscrape(pdfQuery, pdf) 
         pdf.output('__scan_pdf_PDFQuery.pdf', 'F')
 
