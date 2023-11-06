@@ -51,8 +51,8 @@ class PdfFile:
         self.__fileName = fileName
 
     def scan_pdf(self):
-        # PdfFile.__scan_pdf_fpdf(self)
-        PdfFile.__scan_pdf_PDFQuery(self)
+        PdfFile.__scan_pdf_fpdf(self)
+        # PdfFile.__scan_pdf_PDFQuery(self)
         pass
 
     def __scan_pdf_fpdf(self):
@@ -66,8 +66,11 @@ class PdfFile:
         for p in range(10):
             pageObj = pdfReader.pages[p]
             text = pageObj.extract_text()
+            PdfFile.__addPage(pdf)
+            print("Page %s" % p)
+            text = VinaiTranslate.translate_en2vi(text)
             PdfFile.__addTextToPdf(pdf, text)
-        pdf.output('py3k.pdf', 'F')
+        pdf.output('test-2.pdf', 'F')
         pass
 
     def __scan_pdf_PDFQuery(self):
@@ -95,9 +98,5 @@ class PdfFile:
         pdf.set_font('times', '', 11)  
         pdf.ln(10)
     
-    def __addTextToPdf(pdf: CustomFPDF, text: str, x, y):
-        pdf.add_page()
-        pdf.set_font('times', '', 11)  
-        pdf.ln(10)
-        pdf.text(x, y, txt=text)
-        print(pdf.get_x())
+    def __addTextToPdf(pdf: CustomFPDF, text: str):
+        pdf.write(5, text)
