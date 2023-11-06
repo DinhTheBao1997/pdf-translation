@@ -1,45 +1,68 @@
-
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-
-<div class="container center">
-	<div class="row">
-		<div class="col-md-12">
-			<h1 class="white">Custom File Upload</h1>
-			<p class="white">In this example, submit is allowed only in case the user uploads a valid image file.</p>
-		</div>
-	</div>
-
-	<form name="upload" method="post" action="#" enctype="multipart/form-data" accept-charset="utf-8">
-		<div class="row"
-    (dragover)="dragOver($event)"
-    (drop)="dropHandler($event)">
-			<div class="col-md-6 col-md-offset-3 center">
-        <div class="upload-container">
-          <div class="border-container"
-          (dragover)="dragOver($event)"
-          (drop)="dropHandler($event)">
-            <div class="icons fa-4x">
-              <i class="fas fa-file-image" data-fa-transform="shrink-3 down-2 left-6 rotate--45"></i>
-              <i class="fas fa-file-alt" data-fa-transform="shrink-2 up-4"></i>
-              <i class="fas fa-file-pdf" data-fa-transform="shrink-3 down-2 right-6 rotate-45"></i>
-            </div>
-            <!--<input type="file" id="file-upload">-->
-            <p>Drag and drop files here, or
-              <a href="javascript:void(0)" (click)="onClickSelectFile()" id="file-browser">browse</a> your computer.</p>
-          </div>
-          <input #inputFile type="file" [accept]="acceptFiles" (change)="onChangeFile($event)" webkitRelativePath>
-        </div>
-			</div>
-		</div>
-			<!--additional fields-->
-		<div class="row">
-			<div class="col-md-12">
-				<!--the defauld disabled btn and the actual one shown only if the three fields are valid-->
-				<input type="submit" value="Submit!" class="btn btn-primary" id="submitbtn">
-				<button type="button" class="btn btn-default" (click)="clickDownloadFile()" id="fakebtn">Submit! <i class="fa fa-minus-circle"></i></button>
-			</div>
-		</div>
-	</form>
-</div>
-
-<a href="http://www.emilianocostanzo.com" target="_blank" id="sign">EMI</a>
+<section class="wrap">
+  <div id="upload-document-form" class="dropzone dz-clickable">
+    <div class="dz-message needsclick">
+      <div class="dropzone-image">
+        <svg
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          viewBox="0 0 200 110"
+        >
+          <path
+            d="M108.5,75l0,23.9c0,6.1,5,11,11,11l40.4-0.1c10.7-0.1,20.7-4.3,28.2-11.9c7.5-7.6,11.6-17.6,11.6-28.3 c0-22.2-18.1-40.3-40.3-40.2c-4.4-8.5-11-15.6-19-20.8C131.6,3,121.3,0,110.8,0C101,0,91.4,2.6,83,7.5c-7.3,4.3-13.6,10.3-18.2,17.4 c-6.2-3.1-13-4.7-20-4.7C20.1,20.2,0,40.3,0,65.1S20.1,110,44.8,110l0,0l36.3-0.1c6.1,0,11-4.9,11-11l0-24.1l-10.2,0l18.5-25.3 L119.1,75L108.5,75z M159.9,104l-38.3,0.1c-4,0-7.3-3.3-7.3-7.3V80.8l16.3,0.1l-30.2-41.3l-29.9,41l15.7,0.1v16.2 c0,4-3.3,7.3-7.3,7.3l-34.2,0.1c-21.5,0-39-17.5-39-39.1c0-21.6,17.5-39.1,39-39.1c6.9,0,13.6,1.8,19.6,5.3l2.5,1.5l1.5-2.5 c8.8-15,25-24.4,42.4-24.4c18.8,0,36.2,10.9,44.3,27.9l0.8,1.7l1.9-0.1c0.6,0,1.2,0,1.8,0c18.9,0,34.3,15.4,34.3,34.3 C193.9,88.4,178.6,103.8,159.9,104z"
+          ></path>
+        </svg>
+      </div>
+      <p class="dropzone-text">Drag &amp; drop your file here<span>or</span></p>
+      <button
+        id="upload-file"
+        class="cta low dropzone-upload-btn"
+        type="button"
+      >
+        Upload file
+      </button>
+    </div>
+    <input type="file" #inputFile />
+  </div>
+</section>
+<section class="language-selection wrap">
+  <div id="translation-form" class="language-selection-form">
+    <div>
+      <div class="language-select-wrap language-select-wrap-from">
+        <select
+          id="from"
+          name="from"
+          class="language-select language-select-from field"
+          style="visibility: visible"
+        >
+          <ng-container *ngFor="let option of LanguageFromOptions">
+            <option [value]="option.value">{{ option.display }}</option>
+          </ng-container>
+        </select>
+      </div>
+      <div class="language-select-wrap language-select-wrap-to">
+        <select
+          id="to"
+          name="to"
+          class="language-select language-select-to field"
+          style="visibility: visible"
+        >
+          <ng-container *ngFor="let option of LanguageToOptions">
+            <option [value]="option.value">{{ option.display }}</option>
+          </ng-container>
+        </select>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="document-submit">
+  <div class="language-select-wrap language-select-wrap-submit">
+    <button
+      id="submit"
+      class="cta low dropzone-submit-btn"
+      type="button"
+    >
+      Submit
+    </button>
+  </div>
+</section>

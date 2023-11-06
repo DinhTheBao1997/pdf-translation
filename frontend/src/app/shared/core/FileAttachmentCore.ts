@@ -1,4 +1,4 @@
-import { Directive, ElementRef, ViewChild } from '@angular/core';
+import { Directive, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { Utilities } from '../utility/utilities';
 import { SystemConfig } from '@app/config/SystemConfig';
 
@@ -9,14 +9,22 @@ import { SystemConfig } from '@app/config/SystemConfig';
  * If the user clicks close the dialog, this class will call API removes the temp files in the work folder.
  */
 @Directive()
-export abstract class FileAttachmentCore {
+export abstract class FileAttachmentCore implements AfterViewInit {
   @ViewChild('inputFile') protected inputFile: ElementRef<HTMLInputElement>;
+
+  protected abstract addEventListener(): void;
 
   public acceptFiles: string = ".pdf";
   protected file: File = null;
 
   constructor(
   ) {
+  }
+
+  ngAfterViewInit() {
+    this.addEventListener();
+
+    this.inputFile.nativeElement.addEventListener("change", (event) => this.onChangeFile(event));
   }
 
   /**
@@ -44,6 +52,7 @@ export abstract class FileAttachmentCore {
       });
     }
     this.file = files[0];
+    console.log(this.file)
   }
 
   public dragOver(event: DragEvent) {
