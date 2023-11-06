@@ -1,2 +1,8 @@
 https://proceedings.neurips.cc/paper_files/paper/2018/file/c0560792e4a3c79e62f76cbf9fb277dd-Paper.pdf
 https://arxiv.org/pdf/2001.08210.pdf
+https://stackoverflow.com/questions/76191862/how-can-i-fine-tune-mbart-50-for-machine-translation-in-the-transformers-python
+https://github.com/ken11/mbart-finetuning/blob/master/mbart-finetuning.ipynb
+https://www.kaggle.com/code/nguynquangchiu/finetune-mbart50-en-vi/notebook
+https://colab.research.google.com/github/elsanns/xai-nlp-notebooks/blob/master/fine_tune_bart_summarization_two_langs.ipynb#scrollTo=sB0R6z3Wd_-0
+https://medium.com/nlplanet/a-full-guide-to-finetuning-t5-for-text2text-and-building-a-demo-with-streamlit-c72009631887
+https://medium.com/@radicho/fine-tuning-the-multilingual-t5-model-from-huggingface-with-keras-f7f619ec5cfe
