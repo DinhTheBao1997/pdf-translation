@@ -37,7 +37,7 @@ def children(pdfQuery: PyQuery, pdf: CustomFPDF):
         pdf.set_font_size(abs(y0 - y1))
         x = x0
         y = 792 - y0
-        text = VinaiTranslate.translate_en2vi(text)
+        # text = VinaiTranslate.translate_en2vi(text)
         pdf.text(x, y, text)
     for child in pdfQuery.getchildren():
         children(child, pdf)
@@ -77,7 +77,7 @@ class PdfFile:
         pdfQuery = PDFQuery(self.__file)
         # pdf.load()
         # lst = []
-        pdf = CustomFPDF('P', 'pt', 'letter')
+        pdf = CustomFPDF('P', 'pt', 'A4')
         pdf.config()
 
         pagecount = pdfQuery.doc.catalog['Pages'].resolve()['Count']
