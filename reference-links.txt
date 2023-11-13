@@ -16,7 +16,7 @@ https://medium.com/gopenai/understanding-transformers-a-step-by-step-math-exampl
 
 https://medium.com/@datamonsters/artificial-neural-networks-for-natural-language-processing-part-1-64ca9ebfa3b2
 https://towardsdatascience.com/fine-tuning-large-language-models-llms-23473d763b91
-
+https://aicurious.io/blog/2019-09-23-cac-ham-kich-hoat-activation-function-trong-neural-networks
 
 // Keep colab live:
 function ConnectButton(){
