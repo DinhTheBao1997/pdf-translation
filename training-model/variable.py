@@ -1,4 +1,4 @@
-urls = [
+train_urls = [
     # train
     {
         "en": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/gastritis-and-peptic-ulcer-disease/erosive-gastritis",
@@ -64,22 +64,23 @@ urls = [
         "en": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/symptoms-of-gastrointestinal-disorders/nausea-and-vomiting",
         "vi": "https://www.msdmanuals.com/vi/chuy%C3%AAn-gia/r%E1%BB%91i-lo%E1%BA%A1n-ti%C3%AAu-h%C3%B3a/tri%E1%BB%87u-ch%E1%BB%A9ng-c%E1%BB%A7a-c%C3%A1c-t%C3%ACnh-tr%E1%BA%A1ng-b%E1%BA%A5t-th%C6%B0%E1%BB%9Dng-%E1%BB%9F-%C4%91%C6%B0%E1%BB%9Dng-ti%C3%AAu-h%C3%B3a/bu%E1%BB%93n-n%C3%B4n-v%C3%A0-n%C3%B4n",
     },
-
+]
+test_urls = [
     # test
-    # {
-    #     "en": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/symptoms-of-gastrointestinal-disorders/rumination",
-    #     "vi": "https://www.msdmanuals.com/vi/chuy%c3%aan-gia/r%e1%bb%91i-lo%e1%ba%a1n-ti%c3%aau-h%c3%b3a/tri%e1%bb%87u-ch%e1%bb%a9ng-c%e1%bb%a7a-c%c3%a1c-t%c3%acnh-tr%e1%ba%a1ng-b%e1%ba%a5t-th%c6%b0%e1%bb%9dng-%e1%bb%9f-%c4%91%c6%b0%e1%bb%9dng-ti%c3%aau-h%c3%b3a/nhai-l%e1%ba%a1i",
-    # },
-    # {
-    #     "en": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/symptoms-of-gastrointestinal-disorders/constipation",
-    #     "vi": "https://www.msdmanuals.com/vi/chuy%C3%AAn-gia/r%E1%BB%91i-lo%E1%BA%A1n-ti%C3%AAu-h%C3%B3a/tri%E1%BB%87u-ch%E1%BB%A9ng-c%E1%BB%A7a-c%C3%A1c-t%C3%ACnh-tr%E1%BA%A1ng-b%E1%BA%A5t-th%C6%B0%E1%BB%9Dng-%E1%BB%9F-%C4%91%C6%B0%E1%BB%9Dng-ti%C3%AAu-h%C3%B3a/t%C3%A1o-b%C3%B3n",
-    # },
-    # {
-    #     "en": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/symptoms-of-gastrointestinal-disorders/diarrhea",
-    #     "vi": "https://www.msdmanuals.com/vi/chuy%c3%aan-gia/r%e1%bb%91i-lo%e1%ba%a1n-ti%c3%aau-h%c3%b3a/tri%e1%bb%87u-ch%e1%bb%a9ng-c%e1%bb%a7a-c%c3%a1c-t%c3%acnh-tr%e1%ba%a1ng-b%e1%ba%a5t-th%c6%b0%e1%bb%9dng-%e1%bb%9f-%c4%91%c6%b0%e1%bb%9dng-ti%c3%aau-h%c3%b3a/b%e1%bb%87nh-ti%c3%aau-ch%e1%ba%a3y",
-    # },
-    # {
-    #     "en": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/symptoms-of-gastrointestinal-disorders/gas-related-complaints",
-    #     "vi": "https://www.msdmanuals.com/vi/chuy%C3%AAn-gia/r%E1%BB%91i-lo%E1%BA%A1n-ti%C3%AAu-h%C3%B3a/tri%E1%BB%87u-ch%E1%BB%A9ng-c%E1%BB%A7a-c%C3%A1c-t%C3%ACnh-tr%E1%BA%A1ng-b%E1%BA%A5t-th%C6%B0%E1%BB%9Dng-%E1%BB%9F-%C4%91%C6%B0%E1%BB%9Dng-ti%C3%AAu-h%C3%B3a/tri%E1%BB%87u-ch%E1%BB%A9ng-li%C3%AAn-quan-%C4%91%E1%BA%BFn-h%C6%A1i",
-    # },
+    {
+        "en": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/symptoms-of-gastrointestinal-disorders/rumination",
+        "vi": "https://www.msdmanuals.com/vi/chuy%c3%aan-gia/r%e1%bb%91i-lo%e1%ba%a1n-ti%c3%aau-h%c3%b3a/tri%e1%bb%87u-ch%e1%bb%a9ng-c%e1%bb%a7a-c%c3%a1c-t%c3%acnh-tr%e1%ba%a1ng-b%e1%ba%a5t-th%c6%b0%e1%bb%9dng-%e1%bb%9f-%c4%91%c6%b0%e1%bb%9dng-ti%c3%aau-h%c3%b3a/nhai-l%e1%ba%a1i",
+    },
+    {
+        "en": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/symptoms-of-gastrointestinal-disorders/constipation",
+        "vi": "https://www.msdmanuals.com/vi/chuy%C3%AAn-gia/r%E1%BB%91i-lo%E1%BA%A1n-ti%C3%AAu-h%C3%B3a/tri%E1%BB%87u-ch%E1%BB%A9ng-c%E1%BB%A7a-c%C3%A1c-t%C3%ACnh-tr%E1%BA%A1ng-b%E1%BA%A5t-th%C6%B0%E1%BB%9Dng-%E1%BB%9F-%C4%91%C6%B0%E1%BB%9Dng-ti%C3%AAu-h%C3%B3a/t%C3%A1o-b%C3%B3n",
+    },
+    {
+        "en": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/symptoms-of-gastrointestinal-disorders/diarrhea",
+        "vi": "https://www.msdmanuals.com/vi/chuy%c3%aan-gia/r%e1%bb%91i-lo%e1%ba%a1n-ti%c3%aau-h%c3%b3a/tri%e1%bb%87u-ch%e1%bb%a9ng-c%e1%bb%a7a-c%c3%a1c-t%c3%acnh-tr%e1%ba%a1ng-b%e1%ba%a5t-th%c6%b0%e1%bb%9dng-%e1%bb%9f-%c4%91%c6%b0%e1%bb%9dng-ti%c3%aau-h%c3%b3a/b%e1%bb%87nh-ti%c3%aau-ch%e1%ba%a3y",
+    },
+    {
+        "en": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/symptoms-of-gastrointestinal-disorders/gas-related-complaints",
+        "vi": "https://www.msdmanuals.com/vi/chuy%C3%AAn-gia/r%E1%BB%91i-lo%E1%BA%A1n-ti%C3%AAu-h%C3%B3a/tri%E1%BB%87u-ch%E1%BB%A9ng-c%E1%BB%A7a-c%C3%A1c-t%C3%ACnh-tr%E1%BA%A1ng-b%E1%BA%A5t-th%C6%B0%E1%BB%9Dng-%E1%BB%9F-%C4%91%C6%B0%E1%BB%9Dng-ti%C3%AAu-h%C3%B3a/tri%E1%BB%87u-ch%E1%BB%A9ng-li%C3%AAn-quan-%C4%91%E1%BA%BFn-h%C6%A1i",
+    },
 ]

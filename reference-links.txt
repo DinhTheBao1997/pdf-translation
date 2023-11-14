@@ -16,6 +16,9 @@ https://medium.com/gopenai/understanding-transformers-a-step-by-step-math-exampl
 
 https://medium.com/@datamonsters/artificial-neural-networks-for-natural-language-processing-part-1-64ca9ebfa3b2
 https://towardsdatascience.com/fine-tuning-large-language-models-llms-23473d763b91
+https://datascience.stackexchange.com/questions/51065/what-is-the-positional-encoding-in-the-transformer-model
+https://machinelearningmastery.com/a-gentle-introduction-to-positional-encoding-in-transformer-models-part-1/
+https://pbcquoc.github.io/
 
 
 // Keep colab live:

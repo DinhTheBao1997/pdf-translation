@@ -1,11 +1,19 @@
 import requests
 from bs4 import BeautifulSoup
 import csv
-from variable import urls
+from variable import train_urls, test_urls
 import hashlib
 
+train_mode = False
 result = {}
-file_name = "crawler_data"
+
+if train_mode:
+    file_name = "train"
+    urls = train_urls
+else:
+    file_name = "test"
+    urls = test_urls
+
 file_path = f'data/{file_name}.csv'
 with open(file_path, 'w', encoding="utf-8") as file:
     writer = csv.writer(file,lineterminator="\n")
