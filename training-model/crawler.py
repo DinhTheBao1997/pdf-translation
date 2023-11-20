@@ -4,7 +4,7 @@ import csv
 from variable import train_urls, test_urls
 import hashlib
 
-train_mode = False
+train_mode = True
 result = {}
 
 if train_mode:
@@ -16,8 +16,8 @@ else:
 
 file_path = f'data/{file_name}.csv'
 with open(file_path, 'w', encoding="utf-8") as file:
-    writer = csv.writer(file,lineterminator="\n")
-    writer.writerow(["Id", "Language", "Text", "Expected"])
+    writer = csv.writer(file, lineterminator="\n")
+    writer.writerow(["en", "ja", "vi"])
 
 origin = "https://www.msdmanuals.com"
 def crawler(url, mode: str):
@@ -36,19 +36,18 @@ def crawler(url, mode: str):
 def save_csv():
     texts_en = result["en"]
     texts_vi = result["vi"]
+    texts_ja = result["ja"]
     if len(texts_en) != len(texts_vi):
         return
     with open(file_path, 'a', encoding="utf-8") as file:
         writer = csv.writer(file,lineterminator="\n")
         for i in range(0, len(texts_en)):
-            text_en = texts_en[i]
-            id = hashlib.md5(text_en.encode()).hexdigest()
-            writer.writerow([id, "en", text_en, texts_vi[i]])
+            writer.writerow([texts_en[i], texts_ja[i], texts_vi[i]])
 
 # Run the crawler function
-
 for url in urls:
     crawler(url, "en")
+    crawler(url, "ja")
     crawler(url, "vi")
     try:
         save_csv()
