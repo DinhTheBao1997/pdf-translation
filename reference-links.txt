@@ -19,6 +19,7 @@ https://towardsdatascience.com/fine-tuning-large-language-models-llms-23473d763b
 https://datascience.stackexchange.com/questions/51065/what-is-the-positional-encoding-in-the-transformer-model
 https://machinelearningmastery.com/a-gentle-introduction-to-positional-encoding-in-transformer-models-part-1/
 https://pbcquoc.github.io/
+https://github.com/ejmejm/multilingual-nmt-mt5/blob/main/nmt_full_version.ipynb
 
 
 // Keep colab live:

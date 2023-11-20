@@ -17,4 +17,3 @@ class VinaiTranslate(TransalteCore):
         vi_text = tokenizer_en2vi.batch_decode(output_ids, skip_special_tokens=True)
         vi_text = " ".join(vi_text)
         return vi_text
-        return ""

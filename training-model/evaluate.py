@@ -1,62 +1,60 @@
 # Evaluate fine tune model
 from datasets import load_dataset
-from transformers import TFMT5ForConditionalGeneration, MT5Tokenizer, DataCollatorForSeq2Seq
-from torch.utils.data import DataLoader
-import evaluate
-import torch
-device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
-
+from transformers import TFMT5ForConditionalGeneration, MT5Tokenizer
+from sklearn.model_selection import train_test_split
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
+IS_LOAD_FINE_TUNE = False
+max_length = 200
+
 dataset = load_dataset("csv", data_files={'train': 'train.csv', 'test': 'test.csv'})
 dataset = dataset["test"].shuffle(seed=42)
 
-checkpoint_filepath = "/content/drive/MyDrive/training/2023-11-10/T5.ckpt"
 tokenizer = MT5Tokenizer.from_pretrained("google/mt5-small")
 model = TFMT5ForConditionalGeneration.from_pretrained("google/mt5-small")
-# model.to(device)
-model.load_weights(checkpoint_filepath)
 
 def preprocess_function(examples):
     padding = "max_length"
-    max_length = 200
-
     inputs = [ex for ex in examples["Text"]]
     targets = [ex for ex in examples["Expected"]]
     model_inputs = tokenizer(inputs, max_length=max_length, padding=padding, truncation=True)
     labels = tokenizer(targets, max_length=max_length, padding=padding, truncation=True)
-
     model_inputs["labels"] = labels["input_ids"]
     return model_inputs
 
-test_dataset = dataset.map(preprocess_function, batched=True, desc="Running tokenizer")
-
-eval_dataloader = DataLoader(test_dataset, batch_size=8)
-
-model.compile()
-
-def test(test):
-
+def to_pad_sequences(test):
     tokenizer = Tokenizer()
     tokenizer.fit_on_texts(test)
-
-    # Convert text to sequences of numerical indices
     sequences = tokenizer.texts_to_sequences(test)
+    return pad_sequences(sequences, maxlen=max_length)
 
-    # Pad sequences to ensure they have the same length
-    max_sequence_length = 100  # Adjust based on your model's requirements
-    return pad_sequences(sequences, maxlen=max_sequence_length)
-# metric = evaluate.load("accuracy")
-model.evaluate(test(x_test), test(y_test))
-# for batch in eval_dataloader:
-#     batch = {k: v.to(device) for k, v in batch.items()}
-#     with torch.no_grad():
-#         outputs = model(**batch)
+test_dataset = dataset.map(preprocess_function, batched=True, desc="Running tokenizer")
 
-#     logits = outputs.logits
-#     predictions = torch.argmax(logits, dim=-1)
-#     metric.add_batch(predictions=predictions, references=batch["labels"])
-# metric.compute()
+x = test_dataset['labels']
+y = test_dataset['input_ids']
+x_test, _, y_test, _ = train_test_split(x, y, test_size=0.75, random_state=42)
+
+IS_LOAD_FINE_TUNE = True
+if IS_LOAD_FINE_TUNE:
+    checkpoint_filepath = "/content/drive/MyDrive/training/2023-11-10/T5.ckpt"
+    model.load_weights(checkpoint_filepath)
+
+def prefix():
+    task_prefix = "translate English to German: "
+    sentences = ["The house is wonderful.", "I like to work in NYC."]
+    inputs = tokenizer([task_prefix + sentence for sentence in sentences], return_tensors="pt", padding=True)
+    output_sequences = model.generate(
+        input_ids=inputs["input_ids"],
+        attention_mask=inputs["attention_mask"],
+        do_sample=False,  # disable sampling to test if batching affects output
+    )
+    print(tokenizer.batch_decode(output_sequences, skip_special_tokens=True))
+
+def evaluate():
+    model.compile()
+    # Assuming you have a simple model
+    results = model.evaluate(x_test, y_test)
+
