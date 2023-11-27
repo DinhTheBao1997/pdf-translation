@@ -139,3 +139,7 @@ def run(trainer: Seq2SeqTrainer):
 
 trainer = repair()
 run(trainer)
+
+model = MBartForConditionalGeneration.from_pretrained(output_dir)
+tokenizer = MBartTokenizer.from_pretrained(output_dir)
+results = model.eval()
