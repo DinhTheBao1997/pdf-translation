@@ -1,4 +1,4 @@
-!pip install -q transformers sentencepiece datasets accelerate
+!pip install -q transformers sentencepiece datasets accelerate sklearn
 
 from transformers import MBartForConditionalGeneration, MBartTokenizer
 import math
