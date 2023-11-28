@@ -1,6 +1,12 @@
 (function crawlerLink() {
-    const els = document.querySelectorAll(".medicalsection.main__content>.medicalsection__main>ul>li>div.medicalsection__column>ul>li>a");
-    const links = Array.from(els).map(el => el.href);
+    const topics = ".section__list--2col a";
+    const details = ".medicalsection.main__content>.medicalsection__main>ul>li>div.medicalsection__column>ul>li>a";
+    const langs = "#ui-id-2 option"
+    const query=langs;
+    // const els = document.querySelectorAll();
+    const els = document.querySelectorAll(query);
+    // const links = Array.from(els).map(el => el.href); // topics, details
+    const links = Array.from(els).map(el => el.value); // langs
     console.log(links)
 })()
 
