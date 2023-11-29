@@ -4,6 +4,7 @@ import csv
 import re
 import json
 import common
+import time
 
 root_url="https://www.msdmanuals.com"
 topic_links_file = "./crawling/health-topics.link"
@@ -80,9 +81,13 @@ def crawler_text():
             if (isIgnore(text)):
                 continue
             lst.append(text)
-    def crawler(url):
+    def crawler(url: str):
         texts = []
+        if url is None or len(url.strip()) == 0:
+            return []
         response = requests.get(url)
+        if response.status_code != 200:
+            return []
         text = response.text
 
         # Parse the HTML content
@@ -91,19 +96,61 @@ def crawler_text():
             elements = soup.select(query)
             extract_text(elements, texts)
         return texts
+    file_name="crawler"
+    file_path = f'data/{file_name}.csv'
+    with open(file_path, 'w', encoding="utf-8") as file:
+        writer = csv.writer(file, lineterminator="\n")
+        writer.writerow(["vi", "en", "ja"])
 
-    base_links = join(read_file(base_detail_links_file))
+    def save_csv(texts_en: list[str], texts_vi: list[str], texts_ja: list[str], url):
+        if len(texts_en) != len(texts_ja) or len(texts_en) != len(texts_vi):
+            return
+        length = len(texts_en)
+        with open(file_path, 'a', encoding="utf-8") as file:
+            writer = csv.writer(file,lineterminator="\n")
+            for i in range(0, length):
+                writer.writerow([texts_vi[i], texts_en[i], texts_ja[i]])
+    link_file = "./crawling/links/link.txt"
+    length=1000
+    def get_urls():
+        # base_links = join(read_file(base_detail_links_file))
+        # base_links = base_links[:length]
+        # urls = []
+        # for link in base_links:
+        #     link_dic = {
+        #         "vi": "",
+        #         "en": "",
+        #         "ja": link,
+        #     }
+        #     for i in range(0, len(langs_1)):
+        #         url = get_language_link(link, langs_1[i])
+        #         link_dic[langs_2[i]]=url
+        #     urls.append(link_dic)
+        # common.write_file(link_file, json.dumps(urls, indent=4, ensure_ascii=False))
+        urls = join(common.read_file(link_file))
+        return urls
+
+
     langs_1 =["newLanguage=vi", "newLanguage=en-"]
     langs_2 = ["vi", "en"]
-    base_links=base_links[:1]
-    for link in base_links:
-        link_dic = {
-            "vi": "",
-            "en": "",
-            "jp": link,
-        }
-        for i in range(0, len(langs_1)):
-            url = get_language_link(link, langs_1[i])
-            link_dic[langs_2[i]]=url
-        print(link_dic)
+
+    print("get_urls start")
+    start=time.time()
+    urls=get_urls()
+    end=time.time()
+    print(f'url time: {end - start}')
+    print("get_urls end")
+
+    for url in urls:
+        texts_en = crawler(url["en"])
+        texts_vi = crawler(url["vi"])
+        texts_ja = crawler(url["ja"])
+        url["ja"]
+        save_csv(texts_en, texts_vi, texts_ja, url["en"])
+    return urls
+print("crawler_text start")
+start=time.time()
 crawler_text()
+end=time.time()
+print(f'time: {end - start}')
+print("crawler_text end")

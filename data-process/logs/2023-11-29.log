@@ -1,0 +1,24 @@
+url time: 3521.46501493454 s = 58.7 phút
+number of links: 3000
+
+crawler time: 9590.5911257267 s = 160 phút = 2.6 giờ
+number of lines: 9472
+
+url time: 5872.51621493 s = 97.9 phút
+number of links: 7083
+
+================================= Training 1 =================================
+# datasets:
+raw_data size: 4871
+train_data size: 4383
+eval_data size: 488
+
+# Hyperparameters:
+batch_size = 2
+learning_rate = 0.0005
+epochs = 4
+logging_steps=1000
+split=0.9
+
+# Time: 1:16:05
+================================= Training 1 =================================
