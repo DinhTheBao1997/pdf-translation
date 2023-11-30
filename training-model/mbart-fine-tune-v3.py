@@ -42,7 +42,9 @@ batch_size = 2
 learning_rate = 0.0005
 epochs = 4
 logging_steps=1000
+save_steps=1000
 split=0.9
+save_strategy="epoch"
 
 def create_folder():
     folders = list(dirs.values())
@@ -113,6 +115,8 @@ def repair() -> Seq2SeqTrainer:
                                     evaluation_strategy="epoch",
                                     per_device_train_batch_size=batch_size,
                                     per_device_eval_batch_size=batch_size,
+                                    save_steps=save_steps,
+                                    save_strategy=save_strategy,
                                     learning_rate=learning_rate,
                                     logging_steps=logging_steps,
                                     num_train_epochs=epochs,
