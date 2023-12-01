@@ -1,9 +1,10 @@
-import { Component, AfterViewInit, ViewContainerRef } from '@angular/core';
+import { Component, AfterViewInit, ViewContainerRef, ComponentRef } from '@angular/core';
 import { FileAttachmentCore } from '@app/shared/core/FileAttachmentCore';
 import { PdfTranslationService } from '../../service/pdf-translation.service';
 import { LoadingService } from '@app/shared/service/loading.service';
 import { ApiProcess } from '@app/shared/decorator/decorator';
 import { SelectOption } from '@app/shared/type/SelectOption';
+import { BackdropComponent } from '@app/shared/ui/backdrop/backdrop.component';
 
 @Component({
   selector: 'app-upload-file',
@@ -52,6 +53,12 @@ export class UploadFileComponent extends FileAttachmentCore implements AfterView
 
   @ApiProcess()
   public async clickUploadFile() {
+    // const backdropComponent: ComponentRef<BackdropComponent> = this.view.createComponent(BackdropComponent);
+    // const html: HTMLElement = backdropComponent.location.nativeElement;
+    // document.body.appendChild(html)
+    // setTimeout(()=> {
+    //   backdropComponent.destroy()
+    // }, 2000)
     if (!this.file) return;
     const form = new FormData();
     form.append('file', this.file, this.file.name);

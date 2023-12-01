@@ -7,22 +7,30 @@ import { ApiService } from './service/api.service';
 import { LoadingComponent } from './ui/loading/loading.component';
 import { NgxLoadingModule } from "ngx-loading";
 import { LoadingService } from './service/loading.service';
-
+import { BackdropComponent } from './ui/backdrop/backdrop.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 @NgModule({
   providers: [Utilities, ApiService, LoadingService],
   declarations: [
     SidebarComponent,
-    LoadingComponent
+    LoadingComponent,
+    BackdropComponent
   ],
   imports: [
     HttpClientModule,
     CommonModule,
     NgxLoadingModule,
+    MatProgressSpinnerModule,
+    BrowserAnimationsModule
   ],
   exports: [
-    SidebarComponent
+    SidebarComponent,
+    BackdropComponent,
+    MatProgressSpinnerModule,
+    BrowserAnimationsModule
   ]
 })
 export class SharedModule { }
