@@ -1,0 +1,103 @@
+================================= Training 1 =================================
+# datasets:
+raw_data size: 9471
+train_data size: 8523
+eval_data size: 948
+
+# Hyperparameters:
+batch_size = 2
+learning_rate = 0.00005
+epochs = 16
+logging_steps=1000
+save_steps=1000
+split=0.9
+save_strategy="epoch"
+
+# Time: 1:16:05
+
+# Loss [34096/34096 4:01:42, 1.74 it/s, Epoch 8/8]
+
+Epoch	Training Loss	Validation Loss
+1	1.798700	4.454440
+2	1.747900	4.488448
+3	1.725600	4.470900
+4	1.798900	4.468263
+5	1.766300	4.500088
+6	1.748900	4.543309
+7	1.696900	4.561617
+8	1.625500	4.561059
+
+# model_base_v4
+================================= Training 1 =================================
+================================= Training 2 =================================
+# datasets:
+raw_data size: 9471
+train_data size: 8523
+eval_data size: 948
+
+# Hyperparameters:
+batch_size = 2
+learning_rate = 0.00005
+epochs = 16
+logging_steps=1000
+save_steps=1000
+split=0.9
+save_strategy="epoch"
+
+# Time: 1:16:05
+
+# Loss [8524/8524, 59:00, Epoch 2/2]
+
+
+Epoch	Training Loss	Validation Loss
+1	1.567700	4.557004
+2	1.491700	4.668316
+================================= Training 2 =================================
+================================= Training 3 =================================
+# datasets:
+raw_data size: 9471
+train_data size: 8523
+eval_data size: 948
+
+# Hyperparameters:
+batch_size = 6
+learning_rate = 0.00005
+epochs = 2
+logging_steps=1000
+save_steps=1000
+split=0.9
+save_strategy="epoch"
+
+# Time: 1:16:05
+
+# Loss [8524/8524, 59:00, Epoch 2/2]
+
+
+Epoch	Training Loss	Validation Loss
+1	1.643100	4.516485
+2	1.660900	4.589331
+================================= Training 3 =================================
+================================= Training 4 =================================
+# datasets:
+raw_data size: 9471
+train_data size: 8523
+eval_data size: 948
+
+# Hyperparameters:
+batch_size = 1
+learning_rate = 0.00003
+epochs = 4
+logging_steps=1000
+save_steps=1000
+split=0.9
+save_strategy="epoch"
+
+# Time: 1:16:05
+
+# Loss [8524/8524, 59:00, Epoch 2/2]
+
+
+Epoch	Training Loss	Validation Loss
+1	1.643100	4.516485
+2	1.660900	4.589331
+================================= Training 4 =================================
