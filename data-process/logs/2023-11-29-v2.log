@@ -1,0 +1,55 @@
+url time: 5872.51621493 s = 97.9 phút
+number of links: 7083
+
+crawler time: 10041.444617986679
+
+================================= Training 1 =================================
+# datasets:
+raw_data size: 9471
+train_data size: 8523
+eval_data size: 948
+
+# # Hyperparameters:
+batch_size = 2
+learning_rate = 0.0005
+epochs = 4
+logging_steps=1000
+save_steps=1000
+split=0.9
+save_strategy="epoch"
+
+# [17048/17048 1:58:47, Epoch 4/4]
+Epoch	Training Loss	Validation Loss
+1	2.966500	4.415155
+2	2.761100	4.330032
+3	2.521800	4.207976
+4	2.249800	4.255848
+================================= Training 1 =================================
+
+================================= Training 2 =================================
+# datasets:
+raw_data size: 9471
+train_data size: 8523
+eval_data size: 948
+
+# Hyperparameters:
+batch_size = 2
+learning_rate = 0.00005
+epochs = 8
+logging_steps=1000
+save_steps=1000
+split=0.9
+save_strategy="epoch"
+
+# [34096/34096 3:59:38, Epoch 8/8]
+Epoch	Training Loss	Validation Loss
+1	2.103200	4.337105
+2	2.029700	4.358619
+3	1.978900	4.313893
+4	2.058400	4.307183
+5	2.009400	4.340752
+6	1.976100	4.346642
+7	1.913800	4.403557
+8	1.841500	4.386678
+{'bleu': 0.007893072422624417, 'precisions': [0.2688679245283019, 0.052083333333333336], 'brevity_penalty': 0.06670021052215644, 'length_ratio': 0.2697201017811705, 'translation_length': 212, 'reference_length': 786}
+================================= Training 2 =================================

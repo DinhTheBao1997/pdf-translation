@@ -1,0 +1,5 @@
+google translate:
+{'bleu': 0.29210067429020176, 'precisions': [0.6408450704225352, 0.38267148014440433, 0.22962962962962963, 0.12927756653992395], 'brevity_penalty': 1.0, 'length_ratio': 1.0327272727272727, 'translation_length': 284, 'reference_length': 275}
+
+my model:
+{'bleu': 0.46883331277637164, 'precisions': [0.7981651376146789, 0.6587677725118484, 0.553921568627451, 0.4720812182741117], 'brevity_penalty': 0.7699205972484414, 'length_ratio': 0.7927272727272727, 'translation_length': 218, 'reference_length': 275}

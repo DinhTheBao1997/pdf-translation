@@ -53,13 +53,17 @@ export class UploadFileComponent extends FileAttachmentCore implements AfterView
 
   @ApiProcess()
   public async clickUploadFile() {
-    // const backdropComponent: ComponentRef<BackdropComponent> = this.view.createComponent(BackdropComponent);
-    // const html: HTMLElement = backdropComponent.location.nativeElement;
-    // document.body.appendChild(html)
-    // setTimeout(()=> {
-    //   backdropComponent.destroy()
-    // }, 2000)
-    if (!this.file) return;
+    if (!this.file) {
+      document.getElementById("showmodal").click();
+      document.getElementById("message").innerText = "Vui lòng lựa chọn file.";
+      return;
+    }
+    const arr = this.file.name.split(".");
+    if (arr[arr.length - 1] != "pdf") {
+      document.getElementById("showmodal").click();
+      document.getElementById("message").innerText = "Hệ thống chỉ hỗ trợ định dạng PDF.";
+      return;
+    }
     const form = new FormData();
     form.append('file', this.file, this.file.name);
     form.append('fileName', this.file.name);

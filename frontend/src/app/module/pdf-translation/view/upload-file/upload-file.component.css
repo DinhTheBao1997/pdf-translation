@@ -32,6 +32,7 @@
   transition: border 0.3s;
 }
 .language-select-wrap-submit:hover .dropzone-submit-btn,
+.cta.low.dropzone-submit-btn.active,
 .dropzone.dz-clickable:hover .dropzone-upload-btn {
   background-image: -webkit-gradient(
     linear,

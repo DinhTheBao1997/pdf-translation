@@ -2,7 +2,6 @@ import requests
 from bs4 import BeautifulSoup
 import csv
 from variable import train_urls
-import hashlib
 import re
 
 def isIgnore(v: str):

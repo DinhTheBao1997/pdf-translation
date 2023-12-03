@@ -37,7 +37,7 @@ def children(pdfQuery: PyQuery, pdf: CustomFPDF):
         pdf.set_font_size(abs(y0 - y1))
         x = x0
         y = 792 - y0
-        # text = VinaiTranslate.translate_en2vi(text)
+        text = VinaiTranslate.translate_en2vi(text)
         pdf.text(x, y, text)
     for child in pdfQuery.getchildren():
         children(child, pdf)
@@ -63,7 +63,7 @@ class PdfFile:
         pdfReader = CustomPdfReader(self.__file)
         pagecount = len(pdfReader.pages)
 
-        for p in range(10):
+        for p in range(0, pagecount):
             pageObj = pdfReader.pages[p]
             text = pageObj.extract_text()
             PdfFile.__addPage(pdf)
@@ -73,26 +73,11 @@ class PdfFile:
         pdf.output('test-2.pdf', 'F')
         pass
 
-    def __scan_pdf_PDFQuery(self):
-        pdfQuery = PDFQuery(self.__file)
-        # pdf.load()
-        # lst = []
-        pdf = CustomFPDF('P', 'pt', 'A4')
-        pdf.config()
-
-        pagecount = pdfQuery.doc.catalog['Pages'].resolve()['Count']
-        # master = pd.DataFrame()
-        for p in range(10):
-            pdfQuery.load(p)
-            PdfFile.__addPage(pdf)
-            print("Page %s" % p)
-            text = PdfFile.__pdfscrape(pdfQuery, pdf) 
-        pdf.output('__scan_pdf_PDFQuery.pdf', 'F')
-
     def __pdfscrape(pdfQuery: PDFQuery, pdf: CustomFPDF):
         pq = pdfQuery.pq('LTPage')
         for child in pq.children():
             children(child, pdf)
+
     def __addPage(pdf: CustomFPDF):
         pdf.add_page()
         pdf.set_font('times', '', 11)  

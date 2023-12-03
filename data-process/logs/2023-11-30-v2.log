@@ -1,0 +1,67 @@
+================================= Training 1 =================================
+# datasets:
+raw_data size: 9471
+train_data size: 8523
+eval_data size: 948
+
+# # Hyperparameters:
+batch_size = 1
+learning_rate = 0.00003
+epochs = 4
+logging_steps=1000
+save_steps=1000
+split=0.9
+save_strategy="epoch"
+
+# [17048/17048 2:29:56, Epoch 2/2]
+Epoch	Training Loss	Validation Loss
+1	1.842400	4.584859
+2	1.644100	4.652164
+================================= Training 1 =================================
+================================= Training 2 =================================
+# datasets:
+raw_data size: 9471
+train_data size: 8523
+eval_data size: 948
+
+# # Hyperparameters:
+batch_size = 1
+learning_rate = 0.00003
+epochs = 4
+logging_steps=1000
+save_steps=1000
+split=0.9
+save_strategy="epoch"
+
+# [34092/34092 3:24:51, Epoch 4/4]
+Epoch	Training Loss	Validation Loss
+1	1.796900	4.655678
+2	1.621800	4.715983
+3	1.598000	4.681214
+4	1.593100	4.725690
+================================= Training 2 =================================
+================================= Training 3 =================================
+# datasets:
+raw_data size: 9471
+train_data size: 8523
+eval_data size: 948
+
+# # Hyperparameters:
+batch_size = 1
+learning_rate = 0.00003
+epochs = 8
+logging_steps=1000
+save_steps=1000
+split=0.9
+save_strategy="epoch"
+
+# [34092/34092 4:01:36, Epoch 4/4]
+
+Epoch	Training Loss	Validation Loss
+1	1.743900	4.662603
+2	1.591900	4.723616
+3	1.589700	4.690962
+4	1.600600	4.692821
+BLEU: {'bleu': 0.005404730538944264, 'precisions': [0.25257731958762886, 0.05172413793103448], 'brevity_penalty': 0.0472857455372225, 'length_ratio': 0.24681933842239187, 'translation_length': 194, 'reference_length': 786}
+================================= Training 3 =================================
+

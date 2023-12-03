@@ -1,3 +1,81 @@
 Vi: 1,458,814
 En: 991,094
 Ja: 80,501
+
+=====================================Training en -> vi
+raw_data size: 25430
+train_data size: 22887
+eval_data size: 2543
+
+# Hyperparameters
+batch_size = 2
+# learning_rate = 0.00003
+learning_rate = 0.00005
+epochs = 8
+logging_steps=1000
+save_steps=1000
+split=0.9
+save_strategy="epoch"
+
+
+[35001/91552 3:59:51 < 6:27:33, 2.43 it/s, Epoch 3.06/8]
+Epoch	Training Loss	Validation Loss
+1	1.110600	1.295378
+2	0.803400	1.237724
+3	0.590300	1.359444
+
+{'bleu': 0.10125539082065754, 'precisions': [0.8310991957104558, 0.6487252124645893], 'brevity_penalty': 0.1378990692077971, 'length_ratio': 0.335431654676259, 'translation_length': 373, 'reference_length': 1112}
+=====================================Training en -> vi
+=====================================Training en -> vi
+raw_data size: 25430
+train_data size: 22887
+eval_data size: 2543
+
+# Hyperparameters
+batch_size = 2
+# learning_rate = 0.00003
+learning_rate = 0.00005
+epochs = 8
+logging_steps=1000
+save_steps=1000
+split=0.9
+save_strategy="epoch"
+
+
+
+[36001/45776 4:01:48 < 1:05:39, 2.48 it/s, Epoch 3.15/4]
+Epoch	Training Loss	Validation Loss
+1	0.238600	1.766946
+2	0.208400	1.795969
+3	0.086800	2.102119
+
+{'bleu': 0.10125539082065754, 'precisions': [0.8310991957104558, 0.6487252124645893], 'brevity_penalty': 0.1378990692077971, 'length_ratio': 0.335431654676259, 'translation_length': 373, 'reference_length': 1112}
+{'bleu': 0.09619003134792899, 'precisions': [0.8233695652173914, 0.6408045977011494], 'brevity_penalty': 0.1324249604203934, 'length_ratio': 0.33093525179856115, 'translation_length': 368, 'reference_length': 1112}
+
+=====================================Training en -> vi
+
+=====================================Training ja -> vi
+raw_data size: 25430
+train_data size: 22887
+eval_data size: 2543
+
+# Hyperparameters
+batch_size = 2
+# learning_rate = 0.00003
+learning_rate = 0.00005
+epochs = 8
+logging_steps=1000
+save_steps=1000
+split=0.9
+save_strategy="epoch"
+
+
+
+[36001/45776 4:01:48 < 1:05:39, 2.48 it/s, Epoch 3.15/4]
+Epoch	Training Loss	Validation Loss
+1	0.238600	1.766946
+2	0.208400	1.795969
+3	0.086800	2.102119
+
+{'bleu': 0.10321035078865413, 'precisions': [0.873972602739726, 0.7304347826086957], 'brevity_penalty': 0.129176532327263, 'length_ratio': 0.32823741007194246, 'translation_length': 365, 'reference_length': 1112}
+=====================================Training ja -> vi

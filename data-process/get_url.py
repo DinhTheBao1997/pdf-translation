@@ -113,21 +113,21 @@ def crawler_text():
     link_file = "./crawling/links/link.txt"
     length=1000
     def get_urls():
-        # base_links = join(read_file(base_detail_links_file))
-        # base_links = base_links[:length]
-        # urls = []
-        # for link in base_links:
-        #     link_dic = {
-        #         "vi": "",
-        #         "en": "",
-        #         "ja": link,
-        #     }
-        #     for i in range(0, len(langs_1)):
-        #         url = get_language_link(link, langs_1[i])
-        #         link_dic[langs_2[i]]=url
-        #     urls.append(link_dic)
-        # common.write_file(link_file, json.dumps(urls, indent=4, ensure_ascii=False))
-        urls = join(common.read_file(link_file))
+        base_links = join(read_file(base_detail_links_file))
+        base_links = base_links[:length]
+        urls = []
+        for link in base_links:
+            link_dic = {
+                "vi": "",
+                "en": "",
+                "ja": link,
+            }
+            for i in range(0, len(langs_1)):
+                url = get_language_link(link, langs_1[i])
+                link_dic[langs_2[i]]=url
+            urls.append(link_dic)
+        common.write_file(link_file, json.dumps(urls, indent=4, ensure_ascii=False))
+        # urls = join(common.read_file(link_file))
         return urls
 
 
