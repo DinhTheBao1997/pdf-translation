@@ -1,18 +1,8 @@
 from django.core.files.base import File
 from pyquery import PyQuery
 from pdfquery import PDFQuery
-from ..common.common import write_file
-import tempfile
-from ..CustomPyPDF.CustomPdfReader import PdfFileWriter, CustomPdfReader
-from ..CustomPyPDF.CustomPageObject import CustomPageObject
-from pypdf._page import PageObject
-from pypdf import PdfReader, PdfWriter, generic, _utils
-from fpdf import FPDF
-import sys
+from ..CustomPyPDF.CustomPdfReader import CustomPdfReader
 from ..CustomPyPDF.CustomFPDF import CustomFPDF
-import sys
-import json
-from ..nlp.service.vinai_transalte import VinaiTranslate
 from ..nlp.service.custom_model import CustomModel
 
 SIZE = {
@@ -21,12 +11,6 @@ SIZE = {
         "y": 297,
     }
 }
-
-def read_file(path):
-    f = open(path, 'rb')
-    pdf_contents = f.read()
-    f.close()
-    return pdf_contents
 
 def children(pdfQuery: PyQuery, pdf: CustomFPDF):
     if pdfQuery is None:
@@ -60,11 +44,15 @@ class PdfFile:
         self.__fileName = fileName
         self.__lang = lang
 
-    def scan_pdf(self):
-        PdfFile.__scan_pdf_fpdf(self)
-        return read_file(self.__fileName)
+    def __addPage(pdf: CustomFPDF):
+        pdf.add_page()
+        pdf.set_font('times', '', 11)  
+        pdf.ln(10)
+    
+    def __addTextToPdf(pdf: CustomFPDF, text: str):
+        pdf.write(5, text)
 
-    def __scan_pdf_fpdf(self):
+    def scan_pdf(self):
         pdf = CustomFPDF()
         pdf.config()
 
@@ -90,17 +78,4 @@ class PdfFile:
                 preds.append(pred)
                 print(pred)
             PdfFile.__addTextToPdf(pdf, ". ".join(preds))
-        pdf.output(self.__fileName, 'F')
-
-    def __pdfscrape(pdfQuery: PDFQuery, pdf: CustomFPDF):
-        pq = pdfQuery.pq('LTPage')
-        for child in pq.children():
-            children(child, pdf)
-
-    def __addPage(pdf: CustomFPDF):
-        pdf.add_page()
-        pdf.set_font('times', '', 11)  
-        pdf.ln(10)
-    
-    def __addTextToPdf(pdf: CustomFPDF, text: str):
-        pdf.write(5, text)
+        return pdf.output()
