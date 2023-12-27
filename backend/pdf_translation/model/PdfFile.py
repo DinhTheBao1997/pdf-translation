@@ -13,6 +13,7 @@ from ..CustomPyPDF.CustomFPDF import CustomFPDF
 import sys
 import json
 from ..nlp.service.vinai_transalte import VinaiTranslate
+from ..nlp.service.custom_model import CustomModel
 
 SIZE = {
     "A4": {
@@ -20,6 +21,12 @@ SIZE = {
         "y": 297,
     }
 }
+
+def read_file(path):
+    f = open(path, 'rb')
+    pdf_contents = f.read()
+    f.close()
+    return pdf_contents
 
 def children(pdfQuery: PyQuery, pdf: CustomFPDF):
     if pdfQuery is None:
@@ -37,7 +44,8 @@ def children(pdfQuery: PyQuery, pdf: CustomFPDF):
         pdf.set_font_size(abs(y0 - y1))
         x = x0
         y = 792 - y0
-        text = VinaiTranslate.translate_en2vi(text)
+        text = CustomModel.translate_en2vi(text)
+        print(text)
         pdf.text(x, y, text)
     for child in pdfQuery.getchildren():
         children(child, pdf)
@@ -45,15 +53,16 @@ def children(pdfQuery: PyQuery, pdf: CustomFPDF):
 class PdfFile:
     __file: File
     __fileName: str
+    __lang: str
 
-    def __init__(self, file: File, fileName: str) -> None:
+    def __init__(self, file: File, fileName: str, lang: str) -> None:
         self.__file = file
         self.__fileName = fileName
+        self.__lang = lang
 
     def scan_pdf(self):
         PdfFile.__scan_pdf_fpdf(self)
-        # PdfFile.__scan_pdf_PDFQuery(self)
-        pass
+        return read_file(self.__fileName)
 
     def __scan_pdf_fpdf(self):
         pdf = CustomFPDF()
@@ -68,10 +77,20 @@ class PdfFile:
             text = pageObj.extract_text()
             PdfFile.__addPage(pdf)
             print("Page %s" % p)
-            text = VinaiTranslate.translate_en2vi(text)
-            PdfFile.__addTextToPdf(pdf, text)
-        pdf.output('test-2.pdf', 'F')
-        pass
+            if text is None or len(text) == 0:
+                continue
+            if self.__lang == "en":
+                raws = " ".join(text.split("\n")).split(".")
+            elif self.__lang == "ja":
+                raws = "".join(text.split("\n")).split("。")
+            preds = []
+            for raw in raws:
+                pred = CustomModel.translate_en2vi(raw)
+                # pred = VinaiTranslate.translate_en2vi(raw)
+                preds.append(pred)
+                print(pred)
+            PdfFile.__addTextToPdf(pdf, ". ".join(preds))
+        pdf.output(self.__fileName, 'F')
 
     def __pdfscrape(pdfQuery: PDFQuery, pdf: CustomFPDF):
         pq = pdfQuery.pq('LTPage')

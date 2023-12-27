@@ -1,5 +1,6 @@
 .main {
-  padding: 5.75em 0 4.5em;
+  /* padding: 5.75em 0 4.5em; */
+  padding-top: 3em;
   display: block;
 }
 .section-header {

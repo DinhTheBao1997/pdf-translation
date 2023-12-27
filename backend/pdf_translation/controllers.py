@@ -10,11 +10,12 @@ from django.core.files.base import File
 def upload_file(request: WSGIRequest):
     if request.method == "POST":
         form = FileUpload(request)
-        print(form.fileName)
-        # handle_uploaded_file(form.file)
-        pdf = PdfFile(form.file, form.fileName)
-        pdf.scan_pdf()
-    return HttpResponse("Hello, world. You're at the polls index.")
+        pdf = PdfFile(form.file, form.fileName, form.lang)
+        file_data = pdf.scan_pdf()
+        response = HttpResponse(file_data, content_type='application/vnd.ms-excel')
+        response['Content-Disposition'] = 'attachment; filename="%s"' % form.fileName
+        response = HttpResponse(file_data, content_type='application/pdf')
+    return response
 
 def handle_uploaded_file(file: File):
     with open(file.name, "wb+") as destination:
