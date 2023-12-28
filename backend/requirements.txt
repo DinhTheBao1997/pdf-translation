@@ -9,3 +9,4 @@ sentencepiece
 tokenizers
 torch
 protobuf
+django
