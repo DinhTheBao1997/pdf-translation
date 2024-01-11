@@ -1,21 +1,14 @@
 from .translate_core import TransalteCore
 from transformers import MBartForConditionalGeneration, MBartTokenizer
-split="."
+model_repo = "DinhTheBao1997/mbart-for-medical"
 lang_code = {
     "tgt": "vi_VN",
 }
-store_model="DinhTheBao1997/mbart-for-medical"
-def load_model():
-    model = MBartForConditionalGeneration.from_pretrained(store_model)
-    return model
+model = MBartForConditionalGeneration.from_pretrained(model_repo)
+tokenizer = MBartTokenizer.from_pretrained(model_repo, tgt_lang=lang_code["tgt"])
 
-def load_tokenizer():
-    tokenizer = MBartTokenizer.from_pretrained(store_model, tgt_lang=lang_code["tgt"])
-    return tokenizer
-
-model=load_model()
-tokenizer=load_tokenizer()
-
+split="."
+predictions=[]
 def clean(v: str):
     return v.strip()
 
@@ -33,7 +26,6 @@ def seperate(para: str):
 
 def decode(lst: list[str]):
     return ". ".join(lst).strip()
-
 class CustomModel(TransalteCore):
     def translate_en2vi(raw: str) -> str:
         sentences = seperate(raw)

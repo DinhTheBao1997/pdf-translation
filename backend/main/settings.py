@@ -19,14 +19,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
-
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-
-# Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -35,7 +27,7 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "luanvan.applikuapp.com,35.198.196.169,127.0.0.1,localhost").split(",")
 
 # Application definition
 
@@ -84,12 +76,12 @@ WSGI_APPLICATION = 'main.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 # SQLite
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 
 # Password validation
@@ -137,39 +129,19 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:4200',
+    "http://localhost:8000",
+    "https://luanvan.applikuapp.com",
+]
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:8000/"
+    "https://luanvan.applikuapp.com"
 ]
 
-LOGGING = {
-    'version': 1,                       # the dictConfig format version
-    'disable_existing_loggers': False,  # retain the default loggers
-    'handlers': {
-        'file': {
-            'class': 'logging.FileHandler',
-            'filename': 'general.log',
-            'level': 'DEBUG',
-            'formatter': 'verbose',
-        },
-    },
-    'loggers': {
-        'my_app': {
-        '': {
-            'level': 'DEBUG',
-            'handlers': ['file'],
-        },
-        },
-    },
-    'formatters': {
-        'verbose': {
-            'format': '{name} {levelname} {asctime} {module} {process:d} {thread:d} {message}',
-            'style': '{',
-        },
-        'simple': {
-            'format': '{levelname} {message}',
-            'style': '{',
-        },
-    },
-}
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+CSRF_USE_SESSIONS = False
+FONT_DIR = os.path.join(STATIC_ROOT, "fonts/times/times.ttf")
 
+# STATICFILES_DIRS = (
+#   os.path.join(BASE_DIR, 'staticfiles/'),
+# )

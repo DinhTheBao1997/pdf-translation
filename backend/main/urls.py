@@ -13,10 +13,13 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.urls import include, path
+from django.urls import include, path, re_path
 from .views import index
+from django.conf import settings
+from django.views.static import serve
 
 urlpatterns = [
     path("", index),
     path("pdf-translation/", include("pdf_translation.urls")),
+    re_path(r'^static/(?P<path>.*)$', serve, {"document_root":settings.STATIC_ROOT}),
 ]
